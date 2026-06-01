@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Trend Agent Scheduler</title>
+</head>
+
+<body>
+
+    <h2>Trend Agent Scheduler</h2>
+
+    <form method="POST" action="/save">
+
+        <label>Country</label>
+        <br>
+        <select name="country">
+
+            {% for country in countries %}
+
+            <option
+                value="{{ country }}"
+                {% if country == config.country %}selected{% endif %}
+            >
+                {{ country }}
+            </option>
+
+            {% endfor %}
+
+        </select>
+
+        <br><br>
+
+        <label>Topic Category</label>
+        <br>
+        <select name="category">
+
+            {% for category in categories %}
+
+            <option
+                value="{{ category }}"
+                {% if category == config.category_name %}selected{% endif %}
+            >
+                {{ category }}
+            </option>
+
+            {% endfor %}
+
+        </select>
+
+        <br><br>
+
+        <label>Interval (minutes)</label>
+        <br>
+        <input
+            type="number"
+            name="interval_minutes"
+            min="1"
+            value="{{ config.interval_minutes }}"
+            required
+        >
+
+        <br><br>
+
+        <button type="submit">
+            Save Scheduler
+        </button>
+
+    </form>
+
+    <hr>
+
+    <h3>Current Configuration</h3>
+
+    <ul>
+        <li><strong>Country:</strong> {{ config.country }}</li>
+        <li><strong>Category:</strong> {{ config.category_name }}</li>
+        <li><strong>Category Code:</strong> {{ config.category_code }}</li>
+        <li><strong>Interval:</strong> {{ config.interval_minutes }} minutes</li>
+    </ul>
+
+</body>
+
+</html>
